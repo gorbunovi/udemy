@@ -8,8 +8,6 @@ import 'package:navigator/data/classes/user_class.dart';
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
 
-
-
   final String title;
 
   @override
@@ -19,9 +17,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
 
   _goToSecondPage(){
-    setState(() {
       Navigator.pushNamed(context, '/second', arguments: User(age: 10,name: 'vasy'));
-    });
   }
 
   @override
@@ -30,11 +26,14 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _goToSecondPage(),
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      body: Center(
+        child: RaisedButton(
+          child: Text('Second'),
+          onPressed: (){
+            _goToSecondPage();
+          },
+        ),
+      ),
     );
   }
 }

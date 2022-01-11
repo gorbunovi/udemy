@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/3. UI/ui/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/3. UI/ui/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/3. UI/ui/build" />
+      <excludeFolder url="file://$MODULE_DIR$/5. Form/form/build" />
+      <excludeFolder url="file://$MODULE_DIR$/5. Form/form/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/5. Form/form/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/5. Form/untitled/build" />
+      <excludeFolder url="file://$MODULE_DIR$/5. Form/untitled/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/5. Form/untitled/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/4. Navigator/navigator/build" />
+      <excludeFolder url="file://$MODULE_DIR$/4. Navigator/navigator/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/4. Navigator/navigator/.pub" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

@@ -22,7 +22,7 @@ class SecondPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              '${this.user?.name} - ${this.user?.age}',
+              '${user.name} - ${user.age}',
               style: Theme.of(context).textTheme.headline4,
             ),
           ],
