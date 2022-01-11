@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:navigator/data/classes/user_class.dart';
+import 'package:navigator/ui/pages/second_page.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -16,8 +17,14 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  _goToSecondPage(){
-      Navigator.pushNamed(context, '/second', arguments: User(age: 10,name: 'vasy'));
+  String _text = 'Text';
+  _goToSecondPage() async {
+      Route route = MaterialPageRoute(builder: (context) => SecondPage(user: User(age: 10,name: 'vasy')));
+      final resault = await Navigator.push(context, route);
+
+      setState(() {
+        _text = resault;
+      });
   }
 
   @override
@@ -27,12 +34,19 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: RaisedButton(
-          child: Text('Second'),
-          onPressed: (){
-            _goToSecondPage();
-          },
-        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('$_text'),
+            RaisedButton(
+              child: Text('Second'),
+              onPressed: (){
+                _goToSecondPage();
+              },
+            ),
+          ],
+        )
+
       ),
     );
   }

@@ -9,6 +9,7 @@ class SecondPage extends StatelessWidget {
 
   SecondPage({required this.user});
 
+  TextEditingController _textEditingController = TextEditingController();
   @override
 
   Widget build(BuildContext context) {
@@ -21,10 +22,21 @@ class SecondPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            TextField(
+              controller: _textEditingController,
+            ),
+            RaisedButton(
+              child: Text('go back'),
+                onPressed: (){
+                  Navigator.pop(context, _textEditingController.text);
+                }
+            ),
             Text(
               '${user.name} - ${user.age}',
               style: Theme.of(context).textTheme.headline4,
             ),
+
+
           ],
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
