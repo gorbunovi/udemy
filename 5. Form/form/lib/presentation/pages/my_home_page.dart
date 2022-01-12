@@ -43,6 +43,8 @@ class _MyHomePageState extends State<MyHomePage> {
     _children = List.from(_children)
       ..add(TextFormField(
         controller: controller,
+        keyboardType: TextInputType.number,
+        onChanged: (data) => print('This is TextField $_count - $data'),
         decoration: InputDecoration(hintText: "This is TextField $_count"),
       ));
     setState(() => ++_count);
