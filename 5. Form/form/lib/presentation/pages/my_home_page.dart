@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:form/data/user_model.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-  final String title;
+  const MyHomePage({Key? key}) : super(key: key);
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -15,6 +14,14 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Widget> _children = [];
   List<TextEditingController> controllers = [];  //the controllers list
   int _count = 0;
+
+  @override
+  void initState() {
+    for(int i=0; i<4; i++){
+      _add();
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,11 +42,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
     TextEditingController controller = TextEditingController();
     controllers.add(controller);      //adding the current controller to the list
-
-    for(int i = 0; i < controllers.length; i++){
-      print(controllers[i].text);     //printing the values to show that it's working
-    }
-
+    //
+    // for(int i = 0; i < controllers.length; i++){
+    //   print(controllers[i].text);     //printing the values to show that it's working
+    // }
     _children = List.from(_children)
       ..add(TextFormField(
         controller: controller,
@@ -49,6 +55,8 @@ class _MyHomePageState extends State<MyHomePage> {
       ));
     setState(() => ++_count);
   }
+
+
 
   @override
   void dispose() {
