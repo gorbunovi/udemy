@@ -11,13 +11,19 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
+  late double _coefficient;
+
   List<User> users = [
-    User('vasy', '200', 100),
-    User('lera', '200', 100),
-    User('seva', '200', 100),
+    User('vasy', 200, 100),
+    User('lera', 200, 100),
+    User('seva', 200, 100),
   ];
 
-  List<TextEditingController> controllers = [];  //the controllers list
+
+  List<TextEditingController> controllers = [];
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +37,9 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       body: ListView.builder(itemCount: users.length, itemExtent: 50,itemBuilder: (BuildContext context, int index) {
-        TextEditingController controller = TextEditingController();
+
+        TextEditingController controller = TextEditingController(text: users[index].newAge != null? '${users[index].newAge}': '');
+        controller.selection = TextSelection.fromPosition(TextPosition(offset: controller.text.length));//курсор в конец строки
         controllers.add(controller);
         return Center(
           child: Container(
@@ -53,7 +61,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: TextFormField(
                       controller: controller,
                       keyboardType: TextInputType.number,
-                      onChanged: (data) => print('${users[index].name} - $data'),
+                      onChanged: (data) {
+                        if (data==''){
+                          _addMyAge(users[index].phone, null, users[index].name);
+                        }else _addMyAge(users[index].phone, int.parse(data), users[index].name);
+
+                      },
                       decoration: InputDecoration(
                         hintText: "input",
                         hintStyle: TextStyle(fontSize: 12,),
@@ -69,10 +82,25 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
 
-  void _addMyAge(int phone, int age){
+  void _addMyAge(int phone,int? myAge, String name){
+    if(myAge==null){
+      setState(() {
+        users.forEach((user) {
+          user.newAge = null;
+        });
+      });
+    }else{
+      _coefficient = phone/myAge;
 
-
+      setState(() {
+        users.forEach((user) {
+          user.newAge = (user.phone / _coefficient).round();
+          print('name - ${user.name}, neAge = ${user.newAge}');
+        });
+      });
+    }
   }
+
   @override
   void dispose() {
     controllers.clear();
