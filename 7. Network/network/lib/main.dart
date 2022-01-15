@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:network/offices.dart';
 
 void main() {
   runApp(const MyApp());
@@ -7,65 +8,59 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
+      home: MyHomePage(),
       title: 'Flutter Demo',
-      theme: ThemeData(
-
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key key, @required this.title}) : super(key: key);
-
-
-  final String title;
+  const MyHomePage({Key key}) : super(key: key);
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-
-      _counter++;
-    });
+  Future <OfficesList> officesList;
+  @override
+  void initState() {
+    super.initState();
+    officesList = getOfficesList();
   }
-
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text('Manual JSON Serialization'),
+        centerTitle: true,
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+      body: FutureBuilder<OfficesList>(
+        future: officesList,
+        builder: (context, snapshot){
+          if(snapshot.hasData){
+            return ListView.builder(
+                itemCount: snapshot.data.offices.length,
+                itemBuilder: (context, index){
+                  return Card(
+                    child: ListTile(
+                      title: Text('${snapshot.data.offices[index].name}'),
+                      subtitle: Text('${snapshot.data.offices[index].address}'),
+                      leading: Image.network('${snapshot.data.offices[index].image}'),
+                      isThreeLine: true,
+                    ),
+                  );
+                }
+            );
+          }else if(snapshot.hasError){
+            return Text('Error');
+          }
+          return Center(child: CircularProgressIndicator());
+        },
       ),
     );
   }
