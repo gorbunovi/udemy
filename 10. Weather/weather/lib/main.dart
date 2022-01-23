@@ -1,60 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:weather/screens/location_screen.dart';
+import 'package:weather/screens/weather_forecast_screen.dart';
 
-void main() {
+
 
   // API Keys - 1369dd6b5ae78fc9952261ab9aa236b4
   // url - http://api.openweathermap.org/data/2.5/forecast/daily?lat=35&lon=139&appid=1369dd6b5ae78fc9952261ab9aa236b4&units=metric
   //       http://api.openweathermap.org/data/2.5/forecast/daily?&q=London&appid=1369dd6b5ae78fc9952261ab9aa236b4&units=metric
 
-  runApp(const MyApp());
-}
+  void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
+  class MyApp extends StatelessWidget {
+    @override
+      Widget build(BuildContext context) {
+      return MaterialApp(
+      home: LocationScreen(),
+      );
+    }
   }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-
-
-  @override
-  Widget build(BuildContext context) {
-
-    return Scaffold(
-      appBar: AppBar(
-
-        title: Text(widget.title),
-      ),
-      body: Center(
-
-        child: Column(
-
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-
-          ],
-        ),
-      ),
-    );
-  }
-}
